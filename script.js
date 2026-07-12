@@ -128,6 +128,73 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------------- scroll animations (GSAP + ScrollTrigger) ---------------- */
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const mm = gsap.matchMedia();
+
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+
+      /* hero: one orchestrated load-in moment */
+      gsap.timeline({ defaults: { ease: 'power2.out' } })
+        .from('.hero-frame', { autoAlpha: 0, duration: 1.1 })
+        .from('.hero-text > *', { y: 26, autoAlpha: 0, duration: 0.8, stagger: 0.14 }, '-=0.7')
+        .from('.hero-photo', { scale: 0.94, autoAlpha: 0, duration: 0.9, transformOrigin: 'bottom center' }, '-=0.6')
+        .from('.hero-bottom', { y: 18, autoAlpha: 0, duration: 0.6 }, '-=0.4');
+
+      /* section headings: soft fade-up */
+      gsap.utils.toArray('.section-head, .quote, .philosophy-text, .booking-info, .map-info').forEach((el) => {
+        gsap.from(el, {
+          y: 30,
+          autoAlpha: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 82%', once: true },
+        });
+      });
+
+      /* gold eyebrow lines draw themselves in */
+      gsap.utils.toArray('.eyebrow span').forEach((line) => {
+        gsap.from(line, {
+          scaleX: 0,
+          duration: 0.9,
+          ease: 'power2.inOut',
+          scrollTrigger: { trigger: line, start: 'top 88%', once: true },
+        });
+      });
+
+      /* cards cascade in as they enter the viewport */
+      ScrollTrigger.batch(
+        '.service-card, .review-card, .team-card, .mosaic-item, .number-item',
+        {
+          start: 'top 86%',
+          once: true,
+          onEnter: (batch) =>
+            gsap.from(batch, {
+              y: 34,
+              autoAlpha: 0,
+              duration: 0.7,
+              ease: 'power2.out',
+              stagger: 0.09,
+              overwrite: true,
+            }),
+        }
+      );
+
+      /* booking form + map embed slide in gently */
+      gsap.utils.toArray('.booking-form, .map-embed, .philosophy-photo').forEach((el) => {
+        gsap.from(el, {
+          y: 40,
+          autoAlpha: 0,
+          duration: 0.9,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 84%', once: true },
+        });
+      });
+    });
+  }
+
   /* ---------------- header shadow on scroll ---------------- */
   const header = document.querySelector('.site-header');
   if (header) {
