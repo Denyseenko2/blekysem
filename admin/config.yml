@@ -1,0 +1,102 @@
+backend:
+  name: git-gateway
+  branch: master
+
+# Netlify handles login/hosting; media the client uploads (new before/after
+# photos, team photo, etc.) lands in assets/ and can be picked in any field.
+media_folder: "assets"
+public_folder: "assets"
+
+locale: "uk"
+
+collections:
+  - name: "site"
+    label: "Тексти сайту"
+    files:
+      - name: "site"
+        label: "Головна сторінка"
+        file: "content/site.json"
+        fields:
+          - label: "Головний екран (Hero)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Лейбл над заголовком", name: "eyebrow", widget: "string" }
+              - { label: "Заголовок, рядок 1", name: "titleLine1", widget: "string" }
+              - { label: "Заголовок, рядок 2", name: "titleLine2", widget: "string" }
+              - { label: "Курсивне слово в кінці", name: "titleAccent", widget: "string" }
+              - { label: "Підзаголовок", name: "subtitle", widget: "text" }
+          - label: "Цитата"
+            name: "quote"
+            widget: "object"
+            fields:
+              - { label: "Текст цитати", name: "text", widget: "text" }
+              - { label: "Автор", name: "author", widget: "string" }
+          - label: "Майстер (спотлайт)"
+            name: "team"
+            widget: "object"
+            fields:
+              - { label: "Ім'я", name: "name", widget: "string" }
+              - { label: "Посада", name: "role", widget: "string" }
+              - { label: "Фото", name: "photo", widget: "image" }
+          - label: "Контакти"
+            name: "contacts"
+            widget: "object"
+            fields:
+              - { label: "Адреса", name: "address", widget: "string" }
+              - { label: "Телефон (для показу)", name: "phone", widget: "string" }
+              - { label: "Телефон (для посилання tel:, без +)", name: "phoneHref", widget: "string" }
+              - { label: "Графік роботи", name: "schedule", widget: "string" }
+              - { label: "Парковка", name: "parking", widget: "string" }
+              - { label: "Instagram (посилання)", name: "instagram", widget: "string" }
+              - { label: "Telegram (посилання)", name: "telegram", widget: "string" }
+              - { label: "TikTok (посилання)", name: "tiktok", widget: "string" }
+          - label: "Цифри-факти"
+            name: "numbers"
+            widget: "object"
+            fields:
+              - { label: "Роки досвіду — число", name: "years", widget: "string" }
+              - { label: "Роки досвіду — підпис", name: "yearsLabel", widget: "string" }
+              - { label: "Клієнти — число", name: "clients", widget: "string" }
+              - { label: "Клієнти — підпис", name: "clientsLabel", widget: "string" }
+              - { label: "Рекомендації — число", name: "recommend", widget: "string" }
+              - { label: "Рекомендації — підпис", name: "recommendLabel", widget: "string" }
+              - { label: "Послуги — число", name: "services", widget: "string" }
+              - { label: "Послуги — підпис", name: "servicesLabel", widget: "string" }
+
+  - name: "services"
+    label: "Послуги та прайс"
+    files:
+      - name: "services"
+        label: "Список послуг"
+        file: "content/services.json"
+        fields:
+          - label: "Послуги"
+            name: "items"
+            widget: "list"
+            summary: "{{name}} — {{price}}"
+            fields:
+              - { label: "Назва", name: "name", widget: "string" }
+              - { label: "Опис", name: "description", widget: "text" }
+              - { label: "Ціна", name: "price", widget: "string" }
+              - { label: "Преміальна (виділена рожевим)", name: "featured", widget: "boolean", default: false }
+
+  - name: "reviews"
+    label: "Відгуки"
+    files:
+      - name: "reviews"
+        label: "Список відгуків"
+        file: "content/reviews.json"
+        fields:
+          - label: "Відгуки"
+            name: "items"
+            widget: "list"
+            summary: "{{author}}"
+            fields:
+              - { label: "Фото ДО", name: "beforeImage", widget: "image" }
+              - { label: "Фото ПІСЛЯ", name: "afterImage", widget: "image" }
+              - { label: "Опис фото ДО (для скрінрідерів)", name: "beforeAlt", widget: "string" }
+              - { label: "Опис фото ПІСЛЯ (для скрінрідерів)", name: "afterAlt", widget: "string" }
+              - { label: "Кількість зірок", name: "stars", widget: "number", default: 5, min: 1, max: 5 }
+              - { label: "Текст відгуку", name: "text", widget: "text" }
+              - { label: "Автор", name: "author", widget: "string" }

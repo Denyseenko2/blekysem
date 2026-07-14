@@ -41,19 +41,19 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="hero">
-  <div class="hero-frame" aria-hidden="true">
-    <span class="corner tl"></span><span class="corner tr"></span>
-    <span class="corner bl"></span><span class="corner br"></span>
-  </div>
-
-  <div class="hero-split">
+  <div class="hero-stage">
     <div class="hero-text">
       <p class="eyebrow">(Грумінг-салон · Хмельницький)</p>
-      <h1 class="hero-title">Твій улюбленець заслуговує <em>найкращого</em></h1>
+      <h1 class="hero-title">
+        <span class="hero-line"><span class="hero-line-inner">Твій улюбленець</span></span>
+        <span class="hero-line hero-line--shift"><span class="hero-line-inner">заслуговує <em>найкращого!</em></span></span>
+      </h1>
       <p class="hero-sub">Професійний догляд, турбота та любов — для щасливих лапок і пухнастиків</p>
     </div>
-    <div class="hero-photo">
-      <img src="assets/hero-cat.webp" alt="Чорний кіт з рожевим бантиком — маскот салону БЛЕКУСЕМ">
+    <div class="hero-arch">
+      <div class="hero-arch-clip">
+        <img src="assets/hero-cat-arch.png" alt="Чорний кіт з рожевим бантиком у рожевій ніші — маскот салону БЛЕКУСЕМ">
+      </div>
     </div>
   </div>
 
@@ -76,20 +76,54 @@
 <section class="numbers">
   <div class="numbers-inner">
     <div class="number-item">
-      <span class="number-value">8</span>
-      <span class="number-label">років досвіду</span>
+      <span class="number-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2 14.35 8.76 21.51 8.91 15.80 13.24 17.88 20.09 12 16 6.12 20.09 8.20 13.24 2.49 8.91 9.65 8.76Z"/>
+        </svg>
+      </span>
+      <span class="number-text">
+        <span class="number-value">8</span>
+        <span class="number-label">років досвіду</span>
+      </span>
     </div>
     <div class="number-item">
-      <span class="number-value">2 400+</span>
-      <span class="number-label">задоволених клієнтів</span>
+      <span class="number-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <ellipse cx="6" cy="10.5" rx="1.7" ry="2.3"/>
+          <ellipse cx="10" cy="6.8" rx="1.8" ry="2.5"/>
+          <ellipse cx="14" cy="6.8" rx="1.8" ry="2.5"/>
+          <ellipse cx="18" cy="10.5" rx="1.7" ry="2.3"/>
+          <path d="M12 11.4c-2.6 0-4.7 1.8-5.4 4-.5 1.7.8 3.3 2.6 3.3.95 0 1.8-.35 2.8-.35s1.85.35 2.8.35c1.8 0 3.1-1.6 2.6-3.3-.7-2.2-2.8-4-5.4-4z"/>
+        </svg>
+      </span>
+      <span class="number-text">
+        <span class="number-value">2 400+</span>
+        <span class="number-label">задоволених клієнтів</span>
+      </span>
     </div>
     <div class="number-item">
-      <span class="number-value">97%</span>
-      <span class="number-label">рекомендують друзям</span>
+      <span class="number-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 20.5S3.5 15.7 3.5 9.7C3.5 6.9 5.6 5 8 5c1.9 0 3.2 1.15 4 2.35C12.8 6.15 14.1 5 16 5c2.4 0 4.5 1.9 4.5 4.7 0 6-8.5 10.8-8.5 10.8z"/>
+        </svg>
+      </span>
+      <span class="number-text">
+        <span class="number-value">97%</span>
+        <span class="number-label">рекомендують друзям</span>
+      </span>
     </div>
     <div class="number-item">
-      <span class="number-value">6</span>
-      <span class="number-label">видів послуг</span>
+      <span class="number-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6.5" r="2.5"/>
+          <circle cx="6" cy="17.5" r="2.5"/>
+          <path d="M8.2 7.9 20 17.5M8.2 16.1 20 6.5M8.6 12l2.8-2.1"/>
+        </svg>
+      </span>
+      <span class="number-text">
+        <span class="number-value">6</span>
+        <span class="number-label">видів послуг</span>
+      </span>
     </div>
   </div>
 </section>
@@ -104,62 +138,62 @@
   <div class="services-grid">
 
     <article class="service-card" data-service="Купання та сушка">
-      <span class="service-num">01</span>
-      <h3>Купання та сушка</h3>
+      <span class="service-num" aria-hidden="true">1</span>
+      <h3 class="service-name"><span class="accent">К</span>упання та сушка</h3>
       <p>Ванна з термальною водою, стайлінг-сушка та розчісування — база бездоганного вигляду.</p>
       <div class="service-foot">
         <span class="service-price">від 350₴</span>
-        <button class="service-arrow" aria-label="Записатись на купання та сушку">→</button>
+        <button class="service-arrow" aria-label="Записатись на купання та сушку">Записатись</button>
       </div>
     </article>
 
     <article class="service-card" data-service="Стрижки">
-      <span class="service-num">02</span>
-      <h3>Стрижки</h3>
+      <span class="service-num" aria-hidden="true">2</span>
+      <h3 class="service-name"><span class="accent">С</span>трижки</h3>
       <p>Породна або авторська стрижка з урахуванням структури хутра і побажань власника.</p>
       <div class="service-foot">
         <span class="service-price">від 400₴</span>
-        <button class="service-arrow" aria-label="Записатись на стрижку">→</button>
+        <button class="service-arrow" aria-label="Записатись на стрижку">Записатись</button>
       </div>
     </article>
 
     <article class="service-card service-card--dark" data-service="SPA-догляд">
-      <span class="service-num">03</span>
-      <h3>SPA-догляд</h3>
+      <span class="service-num" aria-hidden="true">3</span>
+      <h3 class="service-name"><span class="accent">S</span>PA-догляд</h3>
       <p>Преміальний ритуал: маска для шерсті, масаж, ароматерапія та фінішний блиск.</p>
       <div class="service-foot">
         <span class="service-price">від 500₴</span>
-        <button class="service-arrow" aria-label="Записатись на SPA-догляд">→</button>
+        <button class="service-arrow" aria-label="Записатись на SPA-догляд">Записатись</button>
       </div>
     </article>
 
     <article class="service-card" data-service="Вичісування ковтунів">
-      <span class="service-num">04</span>
-      <h3>Вичісування ковтунів</h3>
+      <span class="service-num" aria-hidden="true">4</span>
+      <h3 class="service-name"><span class="accent">В</span>ичісування ковтунів</h3>
       <p>Дбайливе розплутування без болю та стресу для тварини, спеціальними інструментами.</p>
       <div class="service-foot">
         <span class="service-price">від 300₴</span>
-        <button class="service-arrow" aria-label="Записатись на вичісування ковтунів">→</button>
+        <button class="service-arrow" aria-label="Записатись на вичісування ковтунів">Записатись</button>
       </div>
     </article>
 
     <article class="service-card" data-service="Лапікюр">
-      <span class="service-num">05</span>
-      <h3>Лапікюр</h3>
+      <span class="service-num" aria-hidden="true">5</span>
+      <h3 class="service-name"><span class="accent">Л</span>апікюр</h3>
       <p>Стрижка кігтів, обробка подушечок пом'якшуючим бальзамом, догляд між пальчиками.</p>
       <div class="service-foot">
         <span class="service-price">від 150₴</span>
-        <button class="service-arrow" aria-label="Записатись на лапікюр">→</button>
+        <button class="service-arrow" aria-label="Записатись на лапікюр">Записатись</button>
       </div>
     </article>
 
     <article class="service-card" data-service="Експрес линька">
-      <span class="service-num">06</span>
-      <h3>Експрес линька</h3>
+      <span class="service-num" aria-hidden="true">6</span>
+      <h3 class="service-name"><span class="accent">Е</span>кспрес линька</h3>
       <p>Глибоке видалення підшерстя фурмінатором — менше хутра на дивані вдома.</p>
       <div class="service-foot">
         <span class="service-price">від 400₴</span>
-        <button class="service-arrow" aria-label="Записатись на експрес линьку">→</button>
+        <button class="service-arrow" aria-label="Записатись на експрес линьку">Записатись</button>
       </div>
     </article>
 
@@ -181,7 +215,7 @@
   </div>
 
   <div class="mosaic">
-    <div class="mosaic-item mosaic-big">
+    <div class="mosaic-item">
       <img src="assets/mosaic-grooming.jpg" alt="Грумер розчісує чорного кота з рожевим бантиком">
       <div class="mosaic-overlay"><span>Спокій під час процедури</span></div>
     </div>
@@ -194,15 +228,15 @@
       <div class="mosaic-overlay"><span>Професійні інструменти</span></div>
     </div>
     <div class="mosaic-item">
-      <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=800&auto=format&fit=crop" alt="Кіт після стрижки">
+      <img src="assets/ba1-after.webp" alt="Доглянутий кіт після процедури">
       <div class="mosaic-overlay"><span>Бездоганний результат</span></div>
     </div>
-    <div class="mosaic-item mosaic-wide">
-      <img src="https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?q=80&w=1200&auto=format&fit=crop" alt="Грумінг-салон інтер'єр">
-      <div class="mosaic-overlay"><span>Затишний простір салону</span></div>
+    <div class="mosaic-item">
+      <img src="assets/ba2-after.webp" alt="Білосніжний перс після догляду">
+      <div class="mosaic-overlay"><span>Догляд до останньої пасемки</span></div>
     </div>
     <div class="mosaic-item">
-      <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?q=80&w=800&auto=format&fit=crop" alt="Чорний кіт портрет">
+      <img src="assets/hero-cat.webp" alt="Чорний кіт з рожевим бантиком — маскот салону">
       <div class="mosaic-overlay"><span>Наш улюблений маскот</span></div>
     </div>
   </div>
@@ -231,37 +265,15 @@
     <h2 class="section-title">Руки, яким <em>довіряють</em></h2>
   </div>
 
-  <div class="team-grid">
-    <article class="team-card">
-      <div class="team-photo">
-        <img src="assets/team-maryna.webp" alt="Марина Ковальчук — засновниця та грумер-стиліст">
-      </div>
-      <div class="team-meta">
-        <h3>Марина Ковальчук</h3>
-        <span class="team-divider" aria-hidden="true"></span>
-        <p>Засновниця · грумер-стиліст</p>
-      </div>
-    </article>
-    <article class="team-card">
-      <div class="team-photo">
-        <img src="assets/team-oleh.webp" alt="Олег Стасюк — майстер SPA та вичісування">
-      </div>
-      <div class="team-meta">
-        <h3>Олег Стасюк</h3>
-        <span class="team-divider" aria-hidden="true"></span>
-        <p>SPA та вичісування</p>
-      </div>
-    </article>
-    <article class="team-card">
-      <div class="team-photo">
-        <img src="assets/team-alina.webp" alt="Аліна Петренко — майстриня породних стрижок">
-      </div>
-      <div class="team-meta">
-        <h3>Аліна Петренко</h3>
-        <span class="team-divider" aria-hidden="true"></span>
-        <p>Породні стрижки</p>
-      </div>
-    </article>
+  <div class="team-single">
+    <span class="team-bigname" aria-hidden="true">Майстри</span>
+    <div class="team-photo-frame">
+      <img src="assets/team-maryna.webp" alt="Марина Ковальчук — засновниця та грумер-стиліст салону БЛЕКУСЕМ">
+      <span class="team-badge">
+        <strong>Марина Ковальчук</strong>
+        <span>Засновниця · грумер-стиліст</span>
+      </span>
+    </div>
   </div>
 </section>
 
@@ -272,51 +284,58 @@
     <h2 class="section-title">Результат, <em>що говорить сам</em></h2>
   </div>
 
-  <div class="reviews-grid">
-    <article class="review-card">
-      <div class="split-photo">
-        <img src="assets/ba1-before.webp" alt="Сірий кіт із ковтунами до грумінгу">
-        <img src="assets/ba1-after.webp" alt="Той самий кіт після грумінгу — доглянута шерсть">
-        <span class="split-line" aria-hidden="true"></span>
-        <span class="split-tag left">До</span>
-        <span class="split-tag right">Після</span>
-      </div>
-      <div class="review-body">
-        <div class="stars" role="img" aria-label="Оцінка 5 з 5 зірок">★★★★★</div>
-        <p>«Ковтуни, з якими ми боролись роками, зняли за одну процедуру — акуратно і без стресу для кота.»</p>
-        <span class="review-author">— Юлія, клієнтка</span>
-      </div>
-    </article>
+  <div class="reviews-carousel">
+    <div class="reviews-track" id="reviewsTrack">
+      <article class="review-card">
+        <div class="split-photo">
+          <img src="assets/ba1-before.webp" alt="Сірий кіт із ковтунами до грумінгу">
+          <img src="assets/ba1-after.webp" alt="Той самий кіт після грумінгу — доглянута шерсть">
+          <span class="split-line" aria-hidden="true"></span>
+          <span class="split-tag left">До</span>
+          <span class="split-tag right">Після</span>
+        </div>
+        <div class="review-body">
+          <div class="stars" role="img" aria-label="Оцінка 5 з 5 зірок">★★★★★</div>
+          <p>«Ковтуни, з якими ми боролись роками, зняли за одну процедуру — акуратно і без стресу для кота.»</p>
+          <span class="review-author">— Юлія, клієнтка</span>
+        </div>
+      </article>
 
-    <article class="review-card">
-      <div class="split-photo">
-        <img src="assets/ba2-before.webp" alt="Білий перс із тьмяною шерстю до купання">
-        <img src="assets/ba2-after.webp" alt="Той самий перс після купання — білосніжна шерсть">
-        <span class="split-line" aria-hidden="true"></span>
-        <span class="split-tag left">До</span>
-        <span class="split-tag right">Після</span>
-      </div>
-      <div class="review-body">
-        <div class="stars" role="img" aria-label="Оцінка 5 з 5 зірок">★★★★★</div>
-        <p>«Наш перс знову білосніжний! Мій кіт ненавидів купання, поки не потрапив у ці турботливі руки.»</p>
-        <span class="review-author">— Дмитро, клієнт</span>
-      </div>
-    </article>
+      <article class="review-card">
+        <div class="split-photo">
+          <img src="assets/ba2-before.webp" alt="Білий перс із тьмяною шерстю до купання">
+          <img src="assets/ba2-after.webp" alt="Той самий перс після купання — білосніжна шерсть">
+          <span class="split-line" aria-hidden="true"></span>
+          <span class="split-tag left">До</span>
+          <span class="split-tag right">Після</span>
+        </div>
+        <div class="review-body">
+          <div class="stars" role="img" aria-label="Оцінка 5 з 5 зірок">★★★★★</div>
+          <p>«Наш перс знову білосніжний! Мій кіт ненавидів купання, поки не потрапив у ці турботливі руки.»</p>
+          <span class="review-author">— Дмитро, клієнт</span>
+        </div>
+      </article>
 
-    <article class="review-card">
-      <div class="split-photo">
-        <img src="assets/ba3-before.webp" alt="Рудий кіт з підшерстям, що линяє, до процедури">
-        <img src="assets/ba3-after.webp" alt="Той самий кіт після експрес-линьки — гладенька шерсть">
-        <span class="split-line" aria-hidden="true"></span>
-        <span class="split-tag left">До</span>
-        <span class="split-tag right">Після</span>
-      </div>
-      <div class="review-body">
-        <div class="stars" role="img" aria-label="Оцінка 5 з 5 зірок">★★★★★</div>
-        <p>«Після експрес-линьки вдома нарешті чисто — шерсті на диванах більше немає. Записуємось щомісяця!»</p>
-        <span class="review-author">— Олена, клієнтка</span>
-      </div>
-    </article>
+      <article class="review-card">
+        <div class="split-photo">
+          <img src="assets/ba3-before.webp" alt="Рудий кіт з підшерстям, що линяє, до процедури">
+          <img src="assets/ba3-after.webp" alt="Той самий кіт після експрес-линьки — гладенька шерсть">
+          <span class="split-line" aria-hidden="true"></span>
+          <span class="split-tag left">До</span>
+          <span class="split-tag right">Після</span>
+        </div>
+        <div class="review-body">
+          <div class="stars" role="img" aria-label="Оцінка 5 з 5 зірок">★★★★★</div>
+          <p>«Після експрес-линьки вдома нарешті чисто — шерсті на диванах більше немає. Записуємось щомісяця!»</p>
+          <span class="review-author">— Олена, клієнтка</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="reviews-nav">
+      <button class="reviews-arrow" id="reviewsPrev" aria-label="Попередній відгук">←</button>
+      <button class="reviews-arrow" id="reviewsNext" aria-label="Наступний відгук">→</button>
+    </div>
   </div>
 </section>
 
@@ -328,7 +347,7 @@
     <dl class="info-list">
       <div class="info-row">
         <dt>📍 Адреса</dt>
-        <dd>м. Хмельницький, вул. Тернопільська, 13</dd>
+        <dd id="cmsAddress">м. Хмельницький, вул. Тернопільська, 13</dd>
       </div>
       <div class="info-row">
         <dt>📞 Телефон</dt>
@@ -336,11 +355,11 @@
       </div>
       <div class="info-row">
         <dt>🕒 Графік</dt>
-        <dd>Пн–Сб 9:00–19:00, Нд вихідний</dd>
+        <dd id="cmsSchedule">Пн–Сб 9:00–19:00, Нд вихідний</dd>
       </div>
       <div class="info-row">
         <dt>🚗 Парковка</dt>
-        <dd>Безкоштовна парковка біля входу</dd>
+        <dd id="cmsParking">Безкоштовна парковка біля входу</dd>
       </div>
       <div class="info-row">
         <dt>💬 Соцмережі</dt>
@@ -387,8 +406,16 @@
     </div>
 
     <div class="form-row">
-      <label for="service">Послуга <span class="req">*</span></label>
-      <select id="service" name="service" required aria-required="true" aria-describedby="serviceError">
+      <label id="serviceLabel">Послуга <span class="req">*</span></label>
+      <div class="service-chips" role="group" aria-labelledby="serviceLabel">
+        <button type="button" class="service-chip" data-value="Купання та сушка" aria-pressed="false">Купання та сушка</button>
+        <button type="button" class="service-chip" data-value="Стрижки" aria-pressed="false">Стрижки</button>
+        <button type="button" class="service-chip" data-value="SPA-догляд" aria-pressed="false">SPA-догляд</button>
+        <button type="button" class="service-chip" data-value="Вичісування ковтунів" aria-pressed="false">Вичісування ковтунів</button>
+        <button type="button" class="service-chip" data-value="Лапікюр" aria-pressed="false">Лапікюр</button>
+        <button type="button" class="service-chip" data-value="Експрес линька" aria-pressed="false">Експрес линька</button>
+      </div>
+      <select id="service" name="service" required aria-required="true" aria-describedby="serviceError" class="sr-only" tabindex="-1">
         <option value="" disabled selected>Оберіть послугу</option>
         <option value="Купання та сушка">Купання та сушка — від 350₴</option>
         <option value="Стрижки">Стрижки — від 400₴</option>

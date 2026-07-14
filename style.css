@@ -5,9 +5,15 @@
 :root {
   --pink-bg: #FFF1F4;
   --pink-bg-deep: #FBE4E9;
-  --maroon: #4A1526;
-  --maroon-deep: #3A1420;
-  --maroon-mid: #5C1E31;
+  /* used sparingly — only where a real punch of color earns its place */
+  --pink-accent: #FF8FA0;
+  /* soft rose panel — a light pink tint, deeper than the page bg */
+  --pink-tint: #F9DAE3;
+  --brown-deep: #3A1420;
+  --brown-mid: #7A3B4A;
+  /* dark berry-pink for large display headings (still AA-readable on the
+     light pink backgrounds); body text stays the darker brown */
+  --pink-dark: #8A2F52;
   --cream: #FBF1E9;
   --gold: #C9A24E;
   --white: #FFFFFF;
@@ -31,7 +37,7 @@ body {
   font-family: var(--sans);
   font-weight: 300;
   background: var(--pink-bg);
-  color: var(--maroon-deep);
+  color: var(--brown-deep);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -61,7 +67,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   text-transform: uppercase;
   letter-spacing: 3px;
   font-size: 12px;
-  color: var(--maroon-mid);
+  color: var(--brown-mid);
   font-weight: 500;
   margin: 0 0 20px;
 }
@@ -73,8 +79,8 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   background: var(--gold);
 }
 
-/* gold text only passes contrast on the dark maroon sections */
-.eyebrow-light { color: var(--gold); }
+/* used on the calm pale sections (philosophy, booking) — dark ink reads best */
+.eyebrow-light { color: var(--brown-deep); }
 
 .section-head {
   max-width: var(--container);
@@ -89,10 +95,10 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
 .section-title {
   font-size: clamp(32px, 5vw, 52px);
   line-height: 1.1;
-  color: var(--maroon-deep);
+  color: var(--pink-dark);
 }
 
-.section-title--light { color: var(--cream); }
+.section-title--light { color: var(--pink-dark); }
 
 .btn {
   display: inline-block;
@@ -111,22 +117,22 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
 
 .btn-gold {
   background: var(--gold);
-  color: var(--maroon-deep);
+  color: var(--white);
 }
 .btn-gold:hover { transform: translateY(-2px); background: #d8b264; }
 
 .btn-outline {
   border-color: var(--gold);
-  color: var(--maroon-deep);
+  color: var(--brown-deep);
 }
-.btn-outline:hover { background: var(--gold); color: var(--maroon-deep); transform: translateY(-2px); }
+.btn-outline:hover { background: var(--gold); color: var(--brown-deep); transform: translateY(-2px); }
 
 .btn-outline-dark {
-  border: 1px solid var(--maroon-deep);
-  color: var(--maroon-deep);
+  border: 1px solid var(--brown-deep);
+  color: var(--brown-deep);
   margin-top: 8px;
 }
-.btn-outline-dark:hover { background: var(--maroon-deep); color: var(--cream); transform: translateY(-2px); }
+.btn-outline-dark:hover { background: var(--brown-deep); color: var(--cream); transform: translateY(-2px); }
 
 /* =================================================================
    HEADER
@@ -142,7 +148,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   padding: 20px var(--gutter);
   background: rgba(251, 241, 244, 0.85);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(74, 21, 38, 0.08);
+  border-bottom: 1px solid rgba(107, 45, 63, 0.08);
 }
 
 .nav-center {
@@ -163,7 +169,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   font-size: 13px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--maroon-deep);
+  color: var(--brown-deep);
   position: relative;
 }
 
@@ -198,7 +204,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
 }
 .burger span {
   width: 22px; height: 1px;
-  background: var(--maroon-deep);
+  background: var(--brown-deep);
 }
 
 .mobile-menu {
@@ -210,7 +216,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   flex-direction: column;
   padding: 24px var(--gutter);
   gap: 20px;
-  border-bottom: 1px solid rgba(74,21,38,0.1);
+  border-bottom: 1px solid rgba(107,45,63,0.1);
   transform: translateY(-8px);
   opacity: 0;
   pointer-events: none;
@@ -233,6 +239,8 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
    HERO
    ================================================================= */
 
+/* full-bleed editorial hero: layered mascot + bows, type on top.
+   overflow stays visible so the cat can overhang the numbers band */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -240,84 +248,105 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   flex-direction: column;
   justify-content: space-between;
   padding: 130px var(--gutter) 56px;
-  overflow: hidden;
   background: linear-gradient(180deg, var(--pink-bg) 0%, var(--pink-bg-deep) 100%);
+  z-index: 5;
 }
 
-.hero-frame {
-  position: absolute;
-  inset: 20px;
-  border: 1px solid rgba(201,162,78,0.45);
+/* DESKTOP hero = two real grid columns (text | arch), so the cat can never
+   overlap the text, the perks row, or the numbers band below it */
+.hero-arch {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
   z-index: 2;
+}
+
+/* photo already has its own painted arch niche + pink backdrop baked in —
+   sharp corners, plus the brand's offset gold outline sitting behind it */
+.hero-arch::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(16px, 16px);
+  border: 1px solid var(--gold);
   pointer-events: none;
 }
-.corner {
-  position: absolute;
-  width: 24px; height: 24px;
-  border: 2px solid var(--gold);
-}
-.corner.tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
-.corner.tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
-.corner.bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
-.corner.br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 
-.hero-split {
+.hero-arch-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(58,20,32,0.16);
+}
+
+.hero-arch-clip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-stage {
   position: relative;
   z-index: 3;
   max-width: var(--container);
   margin: 0 auto;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-  align-items: center;
   flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(300px, 32vw, 400px);
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
   padding-bottom: 40px;
 }
 
+.hero-text { position: relative; z-index: 3; }
+
 .hero-title {
-  font-size: clamp(38px, 5.5vw, 72px);
-  color: var(--maroon-deep);
-  line-height: 1.08;
-  margin: 14px 0 22px;
-  max-width: 560px;
+  font-size: clamp(40px, 5.2vw, 76px);
+  color: var(--pink-dark);
+  line-height: 1.06;
+  margin: 18px 0 26px;
+  position: relative;
+  z-index: 5;
+}
+
+/* each line hides behind its own mask so GSAP can slide it up into view */
+.hero-line {
+  display: block;
+  overflow: hidden;
+}
+.hero-line-inner { display: inline-block; }
+
+/* second line: one line that runs past the text column and slightly over
+   the cat photo. width:max-content lets it overflow the grid column to the
+   right; the line box keeps overflow:hidden only for the vertical reveal */
+.hero-line--shift {
+  margin-left: clamp(10px, 2.5vw, 44px);
+  width: max-content;
+}
+.hero-line--shift .hero-line-inner { white-space: nowrap; }
+
+.hero-title em {
+  font-weight: 500;
 }
 
 .hero-sub {
-  color: var(--maroon-mid);
+  color: var(--brown-mid);
   font-size: clamp(15px, 2vw, 18px);
   font-weight: 300;
-  max-width: 440px;
+  max-width: 400px;
   margin: 0;
 }
 
-/* mascot photo inside a tall arch with an offset gold outline */
-.hero-photo {
+.hero-sub {
   position: relative;
-  justify-self: center;
-  width: min(78vw, 360px);
-}
-
-.hero-photo img {
-  width: 100%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
-  border-radius: 999px 999px 8px 8px;
-}
-
-.hero-photo::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  transform: translate(14px, 14px);
-  border: 1px solid var(--gold);
-  border-radius: 999px 999px 8px 8px;
-  pointer-events: none;
+  z-index: 5;
 }
 
 .hero-bottom {
   position: relative;
-  z-index: 3;
+  isolation: isolate;
+  z-index: 10;
   max-width: var(--container);
   margin: 0 auto;
   width: 100%;
@@ -325,14 +354,14 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   grid-template-columns: 1fr auto 1fr;
   gap: 24px;
   align-items: center;
-  border-top: 1px solid rgba(74,21,38,0.15);
+  border-top: 1px solid rgba(107,45,63,0.15);
   padding-top: 32px;
 }
 
 .hero-col {
   list-style: none;
   margin: 0; padding: 0;
-  color: var(--maroon-mid);
+  color: var(--brown-mid);
   font-size: 13px;
   line-height: 1.8;
   font-weight: 300;
@@ -346,9 +375,9 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
    NUMBERS
    ================================================================= */
 
-/* full-width maroon band */
+/* full-width soft-rose band with gold icons beside each stat */
 .numbers {
-  background: var(--maroon);
+  background: var(--pink-tint);
   padding: 56px var(--gutter);
 }
 
@@ -357,30 +386,47 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   grid-template-columns: repeat(2, 1fr);
   max-width: var(--container);
   margin: 0 auto;
-  gap: 40px;
+  gap: 40px 24px;
 }
 
 .number-item {
-  text-align: center;
-  border-right: 1px solid rgba(201,162,78,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 }
-.number-item:nth-child(2n) { border-right: none; }
+
+/* bare gold icon sitting to the left of the figure — no badge behind */
+.number-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+}
+.number-icon svg { width: 34px; height: 34px; }
+
+.number-text {
+  display: flex;
+  flex-direction: column;
+}
 
 .number-value {
   display: block;
   font-family: var(--serif);
-  font-size: clamp(36px, 5vw, 56px);
+  font-size: clamp(34px, 5vw, 52px);
   font-weight: 400;
-  color: var(--cream);
+  line-height: 1;
+  color: var(--pink-dark);
 }
 
 .number-label {
   display: block;
-  margin-top: 8px;
+  margin-top: 6px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   font-size: 11px;
-  color: rgba(251, 241, 233, 0.7);
+  color: rgba(58, 20, 32, 0.65);
 }
 
 /* =================================================================
@@ -395,88 +441,118 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   padding: 0 var(--gutter);
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  /* generous, uniform gap — no risk of adjacent cards visually touching */
+  gap: 32px;
 }
 
-/* arched cards echo the hero arch */
+/* card with a big faded index numeral in the corner (reference-style),
+   reworked into brand colours + type */
 .service-card {
+  position: relative;
+  overflow: hidden;
   background: var(--white);
-  border: 1px solid rgba(74,21,38,0.08);
-  border-radius: 150px 150px 12px 12px;
-  padding: 52px 28px 30px;
-  text-align: center;
+  border: 1px solid rgba(107,45,63,0.08);
+  border-radius: 0;
+  padding: 34px 30px 28px;
   display: flex;
   flex-direction: column;
+  /* fixed (not min-) height on mobile so every card — regardless of
+     description length — ends with the same gap above its button */
+  height: 340px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
 }
-.service-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(74,21,38,0.12);
+/* lift-on-hover only for devices that actually hover (mouse/trackpad) —
+   on touch, a tap leaves :hover "stuck" and the lifted card visually
+   overlaps its neighbour, which is the bug being fixed here */
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 44px rgba(107,45,63,0.14);
+  }
 }
 
+/* big semi-transparent index numeral in the top-right corner,
+   sized to roughly a quarter of the card */
+/* oversized index that bleeds past the top-right corner (clipped by the
+   card's overflow), just enough to still read the digit */
 .service-num {
-  display: inline-block;
-  align-self: center;
+  position: absolute;
+  top: -70px;
+  right: -18px;
   font-family: var(--serif);
-  font-size: 13px;
-  color: var(--gold);
-  border: 1px solid var(--gold);
-  border-radius: 999px;
-  padding: 6px 14px;
-  margin-bottom: 20px;
+  font-size: 220px;
+  line-height: 1;
+  color: rgba(138,47,82,0.10);
+  pointer-events: none;
+  user-select: none;
 }
 
-.service-card h3 {
-  font-size: 24px;
-  margin-bottom: 12px;
+.service-name {
+  font-size: 26px;
+  margin-bottom: 14px;
+  padding-right: 46px;
+  color: var(--pink-dark);
+}
+/* enlarged gold initial, echoing the reference's accented first letter */
+.service-name .accent {
+  color: var(--gold);
+  font-size: 1.4em;
 }
 
 .service-card p {
   font-size: 14px;
   line-height: 1.7;
-  color: var(--maroon-mid);
+  color: var(--brown-mid);
   margin: 0 0 28px;
+  max-width: 92%;
 }
 
 .service-foot {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   margin-top: auto;
-  border-top: 1px solid rgba(74,21,38,0.1);
-  padding-top: 18px;
 }
 
 .service-price {
   font-family: var(--serif);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
 }
 
+/* square CTA — same prefill-and-scroll behaviour, new shape */
 .service-arrow {
-  width: 42px; height: 42px;
-  border-radius: 50%;
   border: 1px solid var(--gold);
-  background: transparent;
-  color: var(--maroon-deep);
-  font-size: 16px;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-.service-arrow:hover {
+  border-radius: 0;
   background: var(--gold);
-  transform: rotate(45deg);
+  color: var(--white);
+  padding: 12px 22px;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background 0.3s ease, color 0.3s ease;
 }
+.service-arrow:hover { background: transparent; color: var(--brown-deep); }
 
 .service-card--dark {
-  background: var(--maroon);
+  background: var(--pink-accent);
   color: var(--cream);
 }
-.service-card--dark .service-num { color: var(--gold); border-color: var(--gold); }
-.service-card--dark h3, .service-card--dark .service-price { color: var(--cream); }
-.service-card--dark p { color: rgba(251,241,244,0.75); }
-.service-card--dark .service-arrow { color: var(--cream); }
-.service-card--dark .service-foot { border-top-color: rgba(251,241,244,0.22); }
+.service-card--dark .service-num { color: rgba(251,241,233,0.32); }
+.service-card--dark .service-name,
+.service-card--dark .service-price { color: var(--cream); }
+.service-card--dark .service-name .accent { color: var(--cream); }
+.service-card--dark p { color: rgba(251,241,233,0.85); }
+.service-card--dark .service-arrow {
+  background: var(--cream);
+  border-color: var(--cream);
+  color: var(--pink-accent);
+}
+.service-card--dark .service-arrow:hover { background: transparent; color: var(--cream); }
 
 /* =================================================================
    QUOTE
@@ -507,7 +583,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   font-weight: 500;
   font-size: clamp(24px, 3.5vw, 38px);
   line-height: 1.4;
-  color: var(--maroon-deep);
+  color: var(--pink-dark);
 }
 
 .quote-divider {
@@ -522,7 +598,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 12px;
-  color: var(--maroon-mid);
+  color: var(--brown-mid);
 }
 
 /* =================================================================
@@ -531,16 +607,25 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
 
 .about { padding: 100px 0 0; }
 
+/* full-bleed editorial gallery — spans the whole viewport edge to edge,
+   independent of the page container width */
 .mosaic {
-  max-width: var(--container);
-  margin: 48px auto 0;
-  padding: 0 var(--gutter);
+  width: 100%;
+  margin: 44px 0 0;
+  /* tiny breathing room so tiles don't touch the viewport edge */
+  padding: 0 6px;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 180px;
+  grid-auto-rows: clamp(150px, 44vw, 240px);
   grid-auto-flow: dense;
-  gap: 12px;
+  gap: 8px;
 }
+
+/* MOBILE: 2 photos per row, alternating shapes (some tall, some short) */
+.mosaic-item:nth-child(1),
+.mosaic-item:nth-child(4),
+.mosaic-item:nth-child(6) { grid-row: span 2; }
 
 .mosaic-item {
   position: relative;
@@ -551,15 +636,12 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   object-fit: cover;
   transition: transform 0.5s ease;
 }
-.mosaic-item:hover img { transform: scale(1.08); }
-
-.mosaic-big { grid-column: span 2; grid-row: span 2; }
-.mosaic-wide { grid-column: span 2; }
+.mosaic-item:hover img { transform: scale(1.06); }
 
 .mosaic-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(58,20,32,0) 40%, rgba(58,20,32,0.85) 100%);
+  background: linear-gradient(180deg, rgba(107,45,63,0) 40%, rgba(107,45,63,0.85) 100%);
   display: flex;
   align-items: flex-end;
   padding: 16px;
@@ -573,8 +655,10 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   letter-spacing: 0.5px;
 }
 
+/* calm section — no full-saturation block here, keeps the accent color
+   from repeating on every section and feeling heavy */
 .philosophy {
-  background: var(--maroon);
+  background: var(--pink-bg-deep);
   margin-top: 80px;
   padding: 80px var(--gutter);
   display: grid;
@@ -584,7 +668,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
 }
 
 .philosophy-body {
-  color: rgba(251,241,244,0.85);
+  color: var(--brown-mid);
   font-size: 16px;
   line-height: 1.8;
   margin: 24px 0 32px;
@@ -599,12 +683,12 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 13px;
-  color: var(--gold);
-  border-bottom: 1px solid var(--gold);
+  color: var(--brown-deep);
+  border-bottom: 1px solid var(--pink-accent);
   padding-bottom: 4px;
   transition: opacity 0.3s ease;
 }
-.social-link:hover { opacity: 0.7; }
+.social-link:hover { opacity: 0.6; }
 
 .philosophy-photo img {
   width: 100%;
@@ -616,51 +700,68 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
    TEAM
    ================================================================= */
 
-.team { padding: 100px 0; }
+.team { padding: 100px 0 130px; overflow: hidden; }
 
-.team-grid {
-  max-width: var(--container);
-  margin: 48px auto 0;
+/* single spotlight card: a giant name sits behind the photo, its lower
+   half spilling out below the frame — the photo covers the rest */
+.team-single {
+  position: relative;
+  max-width: 560px;
+  margin: 64px auto 0;
   padding: 0 var(--gutter);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
 }
 
-/* arched portraits, meta below — same design language as hero and services */
-.team-photo {
+.team-bigname {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.56em;
+  z-index: 0;
+  font-family: var(--serif);
+  font-size: clamp(56px, 13vw, 130px);
+  line-height: 1;
+  text-align: center;
+  color: var(--pink-dark);
+  opacity: 0.9;
+  pointer-events: none;
+  user-select: none;
+}
+
+.team-photo-frame {
+  position: relative;
+  z-index: 1;
   aspect-ratio: 3/4;
   overflow: hidden;
-  border-radius: 999px 999px 12px 12px;
+  box-shadow: 0 30px 60px rgba(58,20,32,0.16);
 }
-.team-photo img {
-  width: 100%; height: 100%;
+.team-photo-frame img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
 }
-.team-card:hover .team-photo img { transform: scale(1.05); }
 
-.team-meta {
-  text-align: center;
-  padding: 22px 8px 0;
+/* small pill badge with the full name + role, tucked in the corner */
+.team-badge {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--white);
+  padding: 16px 26px;
+  box-shadow: 0 12px 28px rgba(58,20,32,0.14);
 }
-.team-meta h3 {
-  font-size: 22px;
-  color: var(--maroon-deep);
+.team-badge strong {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--pink-dark);
 }
-.team-divider {
-  display: block;
-  width: 36px;
-  height: 1px;
-  background: var(--gold);
-  margin: 10px auto;
-}
-.team-meta p {
-  margin: 0;
-  font-size: 12px;
+.team-badge span {
+  font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--maroon-mid);
+  color: var(--brown-mid);
 }
 
 /* =================================================================
@@ -669,24 +770,66 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
 
 .reviews { padding: 0 0 100px; }
 
-.reviews-grid {
-  max-width: var(--container);
-  margin: 48px auto 0;
-  padding: 0 var(--gutter);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
+/* full-bleed peek carousel: the centered card reads clearly, its
+   neighbours show only a sliver on each edge — same pattern on every
+   screen size, just re-tuned per breakpoint below */
+.reviews-carousel {
+  width: 100%;
+  margin: 48px 0 0;
 }
 
+.reviews-track {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* generous, fixed vertical padding: rotated/lifted side cards need
+     real room above and below so the scroll container never clips
+     their corners, and the block's height stays constant while
+     scrolling instead of jumping around */
+  /* wider side padding on mobile than the card's own edge inset, so a
+     visible sliver of each neighbour always peeks in on both sides */
+  padding: 70px 16vw 60px;
+}
+.reviews-track::-webkit-scrollbar { display: none; }
+
 .review-card {
+  flex: 0 0 72vw;
+  max-width: 620px;
+  scroll-snap-align: center;
   background: var(--white);
-  border: 1px solid rgba(74,21,38,0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(107,45,63,0.08);
+  transform-origin: center bottom;
+  /* JS sets transform/opacity per-frame for the arc effect; CSS just
+     smooths the interpolation between frames */
+  transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
+  will-change: transform;
 }
-.review-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(74,21,38,0.12);
+.review-card.is-active {
+  box-shadow: 0 14px 30px rgba(107,45,63,0.08);
 }
+
+/* round gold nav arrows, centered under the track */
+.reviews-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+.reviews-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--pink-dark);
+  font-size: 18px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.reviews-arrow:hover { background: var(--gold); color: var(--white); }
 
 .split-photo {
   position: relative;
@@ -710,7 +853,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--cream);
-  background: rgba(58,20,32,0.6);
+  background: rgba(107,45,63,0.6);
   padding: 4px 10px;
 }
 .split-tag.left { left: 12px; }
@@ -728,7 +871,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
 .review-body p {
   font-size: 15px;
   line-height: 1.7;
-  color: var(--maroon-deep);
+  color: var(--brown-deep);
   margin: 0 0 16px;
 }
 
@@ -736,7 +879,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--maroon-mid);
+  color: var(--brown-mid);
 }
 
 /* =================================================================
@@ -759,20 +902,20 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   grid-template-columns: 140px 1fr;
   gap: 12px;
   padding: 16px 0;
-  border-bottom: 1px solid rgba(74,21,38,0.1);
+  border-bottom: 1px solid rgba(107,45,63,0.1);
 }
 .info-row dt {
   font-size: 13px;
-  color: var(--maroon-mid);
+  color: var(--brown-mid);
 }
 .info-row dd {
   margin: 0;
   font-size: 15px;
-  color: var(--maroon-deep);
+  color: var(--brown-deep);
 }
 .info-row a { text-decoration: underline; text-underline-offset: 3px; }
 
-/* map inside an arch with an offset gold outline, echoing the hero photo */
+/* square map with an offset gold outline, sharp corners */
 .map-embed {
   position: relative;
   min-height: 440px;
@@ -781,7 +924,6 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   width: 100%;
   height: 100%;
   min-height: 440px;
-  border-radius: 140px 140px 12px 12px;
 }
 .map-embed::before {
   content: "";
@@ -789,7 +931,6 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   inset: 0;
   transform: translate(14px, 14px);
   border: 1px solid var(--gold);
-  border-radius: 140px 140px 12px 12px;
   pointer-events: none;
 }
 
@@ -798,7 +939,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
    ================================================================= */
 
 .booking {
-  background: var(--maroon);
+  background: var(--pink-bg-deep);
   padding: 100px var(--gutter);
   display: grid;
   grid-template-columns: 1fr;
@@ -816,20 +957,22 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   gap: 16px;
 }
 .booking-perks li {
-  color: rgba(251,241,244,0.9);
+  color: var(--brown-deep);
   font-size: 15px;
   display: flex;
   align-items: flex-start;
   gap: 12px;
 }
 .check {
-  color: var(--gold);
-  font-weight: 600;
+  color: var(--pink-accent);
+  font-weight: 700;
 }
 
+/* form on a clean white card — reads far better than a tinted panel */
 .booking-form {
-  background: rgba(251,241,244,0.04);
-  border: 1px solid rgba(201,162,78,0.3);
+  background: var(--white);
+  border: 1px solid rgba(58,20,32,0.1);
+  box-shadow: 0 20px 50px rgba(58,20,32,0.1);
   padding: 36px 28px;
   display: flex;
   flex-direction: column;
@@ -842,49 +985,86 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--brown-mid);
 }
 
-.req { color: var(--gold); }
+.req { color: var(--pink-accent); }
+
+/* clickable service picker — chips are the real UI; the <select> beneath
+   stays as the single source of truth so existing validation/prefill JS
+   keeps working unchanged */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.service-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.service-chip {
+  border: 1px solid rgba(58,20,32,0.18);
+  border-radius: 0;
+  background: var(--white);
+  color: var(--brown-deep);
+  padding: 10px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.service-chip:hover { border-color: var(--gold); }
+.service-chip.is-selected {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--white);
+}
 
 .form-row input,
 .form-row select,
 .form-row textarea {
-  background: rgba(251,241,244,0.06);
-  border: 1px solid rgba(251,241,244,0.25);
-  color: var(--cream);
+  background: var(--pink-bg);
+  border: 1px solid rgba(58,20,32,0.15);
+  color: var(--brown-deep);
   padding: 12px 14px;
   font-family: var(--sans);
   font-size: 14px;
   border-radius: 2px;
 }
 .form-row input::placeholder,
-.form-row textarea::placeholder { color: rgba(251,241,244,0.4); }
+.form-row textarea::placeholder { color: rgba(58,20,32,0.4); }
 
-.form-row select option { color: var(--maroon-deep); }
+.form-row select option { color: var(--brown-deep); }
 
 .form-row input:focus,
 .form-row select:focus,
 .form-row textarea:focus {
   outline: none;
-  border-color: var(--gold);
+  border-color: var(--brown-deep);
 }
 
 .form-row.invalid input,
 .form-row.invalid select {
-  border-color: #E48A9A;
+  border-color: #C0334A;
 }
+.form-row.invalid .service-chips { outline: 1px solid #C0334A; outline-offset: 6px; }
 
 .error-msg {
   font-size: 12px;
-  color: #E48A9A;
+  color: #C0334A;
   min-height: 14px;
 }
 
 .form-note {
   text-align: center;
   font-size: 14px;
-  color: var(--gold);
+  color: var(--brown-deep);
+  font-weight: 500;
   min-height: 20px;
   margin: 0;
 }
@@ -894,7 +1074,8 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
    ================================================================= */
 
 .site-footer {
-  background: var(--maroon-deep);
+  /* light pink tint, not the saturated accent — a quiet close to the page */
+  background: var(--pink-tint);
   padding: 64px var(--gutter) 28px;
 }
 
@@ -906,20 +1087,20 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   gap: 40px;
 }
 
-/* dark footer: render the near-black logo artwork in cream via filter */
+/* logo artwork has a transparent background and dark linework —
+   reads cleanly on the light pink accent without any filter */
 .logo--footer img {
   height: 58px;
-  filter: brightness(0) invert(0.94) sepia(0.08);
 }
 
 .footer-slogan {
   font-family: var(--serif);
   font-size: 18px;
-  color: var(--cream);
+  color: var(--brown-deep);
   margin: 18px 0 0;
   max-width: 260px;
 }
-.footer-slogan em { color: var(--gold); }
+.footer-slogan em { color: var(--brown-deep); }
 
 .footer-nav {
   display: flex;
@@ -930,16 +1111,18 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   font-size: 13px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: rgba(251,241,244,0.75);
+  color: var(--brown-deep);
+  opacity: 0.75;
   width: fit-content;
 }
-.footer-nav a:hover { color: var(--gold); }
+.footer-nav a:hover { opacity: 1; }
 
 .footer-contacts p {
   margin: 0 0 12px;
   font-size: 14px;
   line-height: 1.6;
-  color: rgba(251,241,244,0.85);
+  color: var(--brown-deep);
+  opacity: 0.8;
 }
 .footer-contacts a { text-decoration: underline; text-underline-offset: 3px; }
 .footer-contacts .social-links { margin-top: 20px; }
@@ -948,9 +1131,10 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   max-width: var(--container);
   margin: 48px auto 0;
   padding-top: 20px;
-  border-top: 1px solid rgba(251,241,244,0.15);
+  border-top: 1px solid rgba(58,20,32,0.15);
   font-size: 12px;
-  color: rgba(251,241,244,0.5);
+  color: var(--brown-deep);
+  opacity: 0.55;
   text-align: center;
 }
 
@@ -959,11 +1143,9 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
    ================================================================= */
 
 @media (min-width: 700px) {
-  .hero-split { grid-template-columns: 1.15fr 0.85fr; }
-  .hero-photo { justify-self: end; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .team-grid { grid-template-columns: repeat(3, 1fr); }
-  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-track { padding: 70px 18vw 60px; }
+  .review-card { flex-basis: 62vw; }
   .map-section { grid-template-columns: 1fr 1.2fr; }
   .booking { grid-template-columns: 1fr 1.1fr; }
   .footer-grid { grid-template-columns: 1.2fr 0.8fr 1fr; }
@@ -972,12 +1154,30 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
 @media (min-width: 960px) {
   .nav-center, .nav-right { display: flex; }
   .burger { display: none; }
-  .services-grid { grid-template-columns: repeat(3, 1fr); }
-  .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+  /* bigger cards, 3 across, stepped down evenly like a staircase
+     (equal 40px steps per column; margin, not transform, so GSAP is free) */
+  .services-grid { grid-template-columns: repeat(3, 1fr); align-items: start; gap: 28px; }
+  .service-card { height: auto; min-height: 400px; padding: 46px 40px 40px; }
+  .service-card .service-name { font-size: 30px; }
+  .service-card .service-num { font-size: 270px; top: -84px; right: -22px; }
+  .service-card:nth-child(3n+2) { margin-top: 40px; }
+  .service-card:nth-child(3n) { margin-top: 80px; }
+  .reviews-track { padding: 74px 22vw 64px; gap: 24px; }
+  .review-card { flex-basis: min(46vw, 560px); }
   .numbers-inner { grid-template-columns: repeat(4, 1fr); }
-  .number-item:nth-child(2n) { border-right: 1px solid rgba(201,162,78,0.35); }
-  .number-item:last-child { border-right: none; }
-  .mosaic { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; }
+
+  /* DESKTOP gallery: large asymmetric 4-column mosaic, still full-bleed */
+  .mosaic {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: clamp(230px, 24vw, 340px);
+    gap: 10px;
+  }
+  .mosaic-item { grid-row: auto; grid-column: auto; }
+  .mosaic-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .mosaic-item:nth-child(4) { grid-row: span 2; }
+  .mosaic-item:nth-child(5) { grid-column: span 2; }
+  .mosaic-item:nth-child(6) { grid-row: span 2; }
+
   .philosophy { grid-template-columns: 1.1fr 0.9fr; }
 }
 
@@ -988,8 +1188,29 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   .logo img { height: 42px; }
 }
 
-@media (max-width: 699px) {
-  .hero-bottom { grid-template-columns: 1fr; text-align: center; }
+/* ==== MOBILE / TABLET HERO (< 960px) — its own single-column layout,
+   fully independent of the desktop grid above. Switches at the same point
+   as the burger menu, so the two versions never interfere. ==== */
+@media (max-width: 959px) {
+  /* text block first, then the cat in its frame sitting low, right above
+     the button — the grid collapses to one column so nothing overlaps */
+  .hero { min-height: auto; padding: 104px var(--gutter) 0; }
+  .hero-stage {
+    display: block;
+    padding-bottom: 0;
+    flex: none;
+  }
+  .hero-title { font-size: clamp(38px, 8vw, 60px); }
+  /* phones: let the line wrap normally inside the column again */
+  .hero-line--shift { margin-left: 0; width: auto; }
+  .hero-line--shift .hero-line-inner { white-space: normal; }
+  .hero-arch {
+    justify-self: center;
+    width: min(62vw, 280px);
+    max-width: none;
+    margin: 40px auto 0;
+  }
+  .hero-bottom { grid-template-columns: 1fr; text-align: center; padding-top: 0; padding-bottom: 32px; }
   .hero-col-left, .hero-col-right { text-align: center; }
   .hero-col-left { order: 2; }
   .hero-col-center { order: 1; }
