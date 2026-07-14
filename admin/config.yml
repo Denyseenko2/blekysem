@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: master
+  branch: main
 
 # Netlify handles login/hosting; media the client uploads (new before/after
 # photos, team photo, etc.) lands in assets/ and can be picked in any field.
