@@ -702,35 +702,35 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
 
 .team { padding: 100px 0 110px; }
 
-/* one grid holds every master card PLUS a single shared "Майстри"
-   heading as a full-width row among them. `order` (below) decides
-   where that row falls: after the 3rd card on desktop, after the 1st
-   on mobile — any further masters simply continue the grid beneath it,
-   so nothing is ever duplicated no matter how many cards exist */
+/* one shared "Майстри" heading sits BEHIND the whole group, straddling
+   the top edge of the cards — never duplicated, never per-card. The
+   cards sit on top (z-index) and overlap its lower half a little;
+   its upper half peeks out above them. */
 .team-list {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr;
   align-items: start;
-  gap: 56px 32px;
-  margin: 64px auto 0;
+  gap: 32px;
+  margin: 96px auto 0;
   max-width: var(--container);
   padding: 0 var(--gutter);
 }
 
 .team-single {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 380px;
   margin: 0 auto;
 }
 
-/* single shared heading — a real grid row, not per-card overlay text.
-   Cards carry order 0, 10, 20, 30... (set inline per card by JS); this
-   sits at 25 by default — strictly after the 3rd card (order 20) and
-   before the 4th (order 30) — so it drops onto its own row there, and
-   any further masters continue the grid beneath it. */
 .team-bigname {
-  grid-column: 1 / -1;
-  order: 25;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.4em;
+  z-index: 0;
   display: block;
   font-family: var(--serif);
   font-size: clamp(48px, 10vw, 96px);
@@ -738,6 +738,7 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   text-align: center;
   color: var(--pink-dark);
   opacity: 0.9;
+  pointer-events: none;
   user-select: none;
 }
 
@@ -1193,10 +1194,12 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
 
   .philosophy { grid-template-columns: 1.1fr 0.9fr; }
 
-  /* 3 masters per row max; the shared heading breaks its own row after
-     the 3rd (see the order values set on .team-single / .team-bigname) */
+  /* 3 masters per row max; the shared heading floats behind whichever
+     cards occupy the first row (it's absolutely positioned, so it
+     doesn't care how many rows follow) */
   .team-list { grid-template-columns: repeat(3, 1fr); }
   .team-single { max-width: none; margin: 0; }
+  .team-bigname { top: -0.5em; }
 }
 
 @media (max-width: 959px) {
@@ -1204,9 +1207,6 @@ em { font-family: var(--serif-accent); font-style: italic; font-weight: 500; }
   .burger { display: flex; }
   .site-header { padding: 14px var(--gutter); }
   .logo img { height: 42px; }
-  /* one master per screen; the shared heading sits right after the
-     first card (order 0) and strictly before the second (order 10) */
-  .team-bigname { order: 5; }
 }
 
 /* ==== MOBILE / TABLET HERO (< 960px) — its own single-column layout,

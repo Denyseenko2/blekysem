@@ -495,11 +495,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const list = document.getElementById('teamList');
     if (!list || !data?.items?.length) return;
 
-    // one shared heading (never per-card); `order` gaps of 10 leave room
-    // for the CSS to drop the heading in at exactly the right spot
-    // (see .team-bigname's order in style.css)
-    const cards = data.items.map((member, i) => `
-      <div class="team-single" style="order:${i * 10}">
+    // one shared heading (never per-card) — it's absolutely positioned
+    // behind the cards (see .team-bigname in style.css), so card count
+    // doesn't need any special handling here
+    const cards = data.items.map((member) => `
+      <div class="team-single">
         <div class="team-photo-frame">
           <img src="${escapeHTML(member.photo)}" alt="${escapeHTML(member.name)} — ${escapeHTML(member.role)}, БЛЕКУСЕМ">
           <span class="team-badge">
