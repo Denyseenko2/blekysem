@@ -504,7 +504,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <img src="${escapeHTML(member.photo)}" alt="${escapeHTML(member.name)} — ${escapeHTML(member.role)}, БЛЕКУСЕМ">
           <span class="team-badge">
             <strong>${escapeHTML(member.name)}</strong>
-            <span>${escapeHTML(member.role)}</span>
+            <span>${escapeHTML(member.role).replace(/\s*·\s*/g, '·<br>')}</span>
           </span>
         </div>
       </div>
